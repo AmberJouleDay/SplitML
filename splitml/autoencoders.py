@@ -39,7 +39,7 @@ class ComplexNet(nn.Module):
 
 class DualRealNet(nn.Module):
     """
-    Autoencoder which runs separately on real and imaginary data using real activations/losses
+    Autoencoder which operates separately on real and imaginary data using real activations/losses
     """
     def __init__(self, activation = F.hardtanh, t_input = len(t), M=10, H=5): 
         super(DualRealNet, self).__init__()
