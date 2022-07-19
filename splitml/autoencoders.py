@@ -13,7 +13,8 @@ class ComplexNet(nn.Module):
     """
     Autoencoder which operates with complex data and complex activations/losses
     """
-    def __init__(self, activation = complex_phase_tanh, t_input = 1000, M=10, H=5): 
+    def __init__(self, activation = complex_phase_tanh, t_input, M=10, H=5): 
+        # suggested use of t_input = len(t) where t is the set of time points
         super(ComplexNet, self).__init__()
         self.transform_lin_layer = ComplexLinear(t_input, M) 
         self.transform_hidden_layer = ComplexLinear(M, H)
