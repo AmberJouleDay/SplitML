@@ -5,15 +5,19 @@ Author: Amber Day
 """
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from complexPyTorch.complexLayers import ComplexLinear
-from splitml.activations import complex_phase_tanh
 
 class ComplexNet(nn.Module):
     """
     Autoencoder which operates with complex data and complex activations/losses
     """
-    def __init__(self, activation = complex_phase_tanh, t_input = len(t), M=10, H=5): 
+    def __init__(self, activation, t_input, M=10, H=5): 
+         
+        # t_input: len(t) where t is time point vector
+        # activation: desired activation function
+        # M: output size of linear layer
+        # H: output size of hidden layer
+        
         super(ComplexNet, self).__init__()
         self.transform_lin_layer = ComplexLinear(t_input, M) 
         self.transform_hidden_layer = ComplexLinear(M, H)
@@ -41,7 +45,13 @@ class DualRealNet(nn.Module):
     """
     Autoencoder which runs separately on real and imaginary data using real activations/losses
     """
-    def __init__(self, activation = F.hardtanh, t_input = len(t), M=10, H=5): 
+    def __init__(self, activation, t_input, M=10, H=5): 
+          
+        # t_input: len(t) where t is time point vector
+        # activation: desired activation function
+        # M: output size of linear layer
+        # H: output size of hidden layer
+        
         super(DualRealNet, self).__init__()
         self.transform_lin_layer = nn.Linear(t_input, M) 
         self.transform_hidden_layer = nn.Linear(M, H)
